@@ -2,6 +2,7 @@ import { useEffect, useState, useRef, useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import api from "../api/axios";
 import MessageBubble from "./MessageBubble";
+import sendbtn from '../assets/send.svg'
 
 const ChatWindow = ({ selectedUser }) => {
   const [messages, setMessages] = useState([]);
@@ -145,9 +146,7 @@ const ChatWindow = ({ selectedUser }) => {
           className="bg-blue-600 text-white p-3 rounded-full shadow-md hover:bg-blue-700 disabled:opacity-50"
           aria-label="Send message"
         >
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 10l9-7 9 7-9 7-9-7z" />
-          </svg>
+          <img src={sendbtn} alt="" className="w-5"/>
         </button>
       </div>
     </div>
