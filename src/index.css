@@ -1,1 +1,54 @@
-@import "tailwindcss"
+@import "tailwindcss";
+
+:root{
+	--chat-bg: #f8fafc;
+	--accent: #2563eb;
+	--sent-bg: #1e40af;
+	--recv-bg: #ffffff;
+}
+
+html, body, #root {
+	height: 100%;
+}
+
+body {
+	font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+	background: linear-gradient(180deg, #fbfdff 0%, #eef2f7 100%);
+	color: #111827;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.overflow-y-auto::-webkit-scrollbar {
+	width: 10px;
+	height: 10px;
+}
+.overflow-y-auto::-webkit-scrollbar-track {
+	background: transparent;
+}
+.overflow-y-auto::-webkit-scrollbar-thumb {
+	background-color: rgba(15, 23, 42, 0.12);
+	border-radius: 9999px;
+	border: 2px solid transparent;
+	background-clip: padding-box;
+}
+.overflow-y-auto:hover::-webkit-scrollbar-thumb {
+	background-color: rgba(15, 23, 42, 0.18);
+}
+
+.btn-icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.message-time {
+	font-size: 0.7rem;
+	color: #9ca3af;
+}
+
+input, textarea, button { font-family: inherit; }
+
+.app-fullheight {
+	min-height: 0; 
+}

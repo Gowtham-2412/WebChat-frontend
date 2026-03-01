@@ -115,31 +115,39 @@ const ChatWindow = ({ selectedUser }) => {
   }
 
   return (
-    <div className="w-full flex flex-col">
-      <div className="p-4 border-b bg-gray-100 font-semibold">
-        {selectedUser.username}
+    <div className="w-full flex flex-col h-full">
+      <div className="p-4 border-b bg-white flex items-center gap-3">
+        <div className="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center font-semibold text-gray-700">{(selectedUser.username||"?").charAt(0).toUpperCase()}</div>
+        <div className="flex-1">
+          <div className="font-semibold">{selectedUser.username}</div>
+          <div className="text-xs text-gray-500">{selectedUser.is_online ? "Online" : "Last seen recently"}</div>
+        </div>
       </div>
 
-      <div className="flex-1 p-4 overflow-y-auto space-y-2">
+      <div className="flex-1 p-4 overflow-y-auto space-y-4 bg-gray-50">
         {messages.map((msg, index) => (
           <MessageBubble key={index} message={msg} currentUser={currentUser} />
         ))}
         <div ref={messagesEndRef} />
       </div>
 
-      <div className="p-4 flex border-t">
+      <div className="p-4 flex items-center gap-3 border-t bg-white">
         <input
-          className="flex-1 border p-2 mr-2 rounded"
+          className="flex-1 border border-gray-200 p-3 rounded-full mr-2 focus:outline-none focus:ring-2 focus:ring-blue-200"
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={(e) => e.key === "Enter" && sendMessage()}
           placeholder="Type a message..."
+          aria-label="Type a message"
         />
         <button
           onClick={sendMessage}
-          className="bg-blue-500 text-white px-4 rounded"
+          className="bg-blue-600 text-white p-3 rounded-full shadow-md hover:bg-blue-700 disabled:opacity-50"
+          aria-label="Send message"
         >
-          Send
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 10l9-7 9 7-9 7-9-7z" />
+          </svg>
         </button>
       </div>
     </div>
