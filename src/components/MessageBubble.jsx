@@ -5,7 +5,7 @@ const MessageBubble = ({ message, currentUser }) => {
   const isSender =
     senderId === currentUser || displayName === currentUser;
 
-  const initials = displayName ? displayName.charAt(0).toUpperCase() : "?";
+  // const initials = displayName ? displayName.charAt(0).toUpperCase() : "?";
 
   const timeText = (() => {
     const t = message.timestamp || message.created_at || message.createdAt;
@@ -19,11 +19,6 @@ const MessageBubble = ({ message, currentUser }) => {
 
   return (
     <div className={`mb-4 flex ${isSender ? "justify-end" : "justify-start"}`}>
-      {!isSender && (
-        <div className="mr-3 flex h-10 w-10 flex-none items-center justify-center rounded-2xl bg-slate-800 text-sm font-semibold text-sky-300 shadow-sm">
-          {initials}
-        </div>
-      )}
 
       <div
         className={`max-w-[80%] rounded-3xl px-4 py-3 shadow-lg ring-1 ${
@@ -37,7 +32,7 @@ const MessageBubble = ({ message, currentUser }) => {
             {displayName}
           </div>
         )}
-        <div className="whitespace-pre-wrap break-words leading-7">
+        <div className="whitespace-pre-wrap wrap-break-word leading-7">
           {message.message || message.content}
         </div>
         {timeText && (
@@ -47,11 +42,6 @@ const MessageBubble = ({ message, currentUser }) => {
         )}
       </div>
 
-      {isSender && (
-        <div className="ml-3 flex h-10 w-10 flex-none items-center justify-center rounded-2xl bg-sky-400 text-sm font-semibold text-slate-950 shadow-sm">
-          {initials}
-        </div>
-      )}
     </div>
   );
 };
