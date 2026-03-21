@@ -1,10 +1,9 @@
-import React from "react";
-
 const MessageBubble = ({ message, currentUser }) => {
   const senderId = message.sender ?? message.user ?? message.sender_id;
   const displayName =
     message.sender_username || message.username || String(senderId);
-  const isSender = senderId === currentUser;
+  const isSender =
+    senderId === currentUser || displayName === currentUser;
 
   const initials = displayName ? displayName.charAt(0).toUpperCase() : "?";
 
@@ -19,30 +18,37 @@ const MessageBubble = ({ message, currentUser }) => {
   })();
 
   return (
-    <div className={`flex mb-3 ${isSender ? "justify-end" : "justify-start"}`}>
+    <div className={`mb-4 flex ${isSender ? "justify-end" : "justify-start"}`}>
       {!isSender && (
-        <div className="flex-none w-9 h-9 mr-2 rounded-full bg-blue-200 text-blue-800 flex items-center justify-center font-semibold shadow-sm">
+        <div className="mr-3 flex h-10 w-10 flex-none items-center justify-center rounded-2xl bg-slate-800 text-sm font-semibold text-sky-300 shadow-sm">
           {initials}
         </div>
       )}
 
       <div
-        className={`px-4 py-2 rounded-2xl max-w-[70%] wrap-break-word shadow-sm ${
+        className={`max-w-[80%] rounded-3xl px-4 py-3 shadow-lg ring-1 ${
           isSender
-            ? "bg-blue-600 text-white rounded-br-none"
-            : "bg-white text-gray-800 border rounded-bl-none"
+            ? "rounded-br-md bg-sky-400 text-slate-950 ring-sky-300/20"
+            : "rounded-bl-md bg-slate-900/85 text-slate-100 ring-white/8"
         }`}
       >
-        <div className="whitespace-pre-wrap">{message.message || message.content}</div>
+        {!isSender && (
+          <div className="mb-1 text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">
+            {displayName}
+          </div>
+        )}
+        <div className="whitespace-pre-wrap break-words leading-7">
+          {message.message || message.content}
+        </div>
         {timeText && (
-          <div className={`text-xs mt-1 ${isSender ? "text-blue-100" : "text-gray-400"}`}>
+          <div className={`mt-2 text-xs ${isSender ? "text-slate-700" : "text-slate-500"}`}>
             {timeText}
           </div>
         )}
       </div>
 
       {isSender && (
-        <div className="flex-none w-9 h-9 ml-2 rounded-full bg-blue-400 text-white flex items-center justify-center font-semibold shadow-sm">
+        <div className="ml-3 flex h-10 w-10 flex-none items-center justify-center rounded-2xl bg-sky-400 text-sm font-semibold text-slate-950 shadow-sm">
           {initials}
         </div>
       )}
